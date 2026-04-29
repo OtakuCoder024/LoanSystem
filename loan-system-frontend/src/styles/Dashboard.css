@@ -1,0 +1,144 @@
+:root {
+  --sidebar-bg: #0f172a;
+  --sidebar-item: #1e293b;
+  --sidebar-hover: #334155;
+  --sidebar-active: #8b5cf6;
+
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+
+  --main-content: rgb(114, 139, 168);
+  --bg-card: #1e293b; 
+  --bg-card2: #445b80; 
+}
+
+.dashboard-layout{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: var(--main-content);
+    overflow: hidden;
+}
+
+.topbar{
+    height: 100px;
+    background: var(--sidebar-bg);
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.topbar h3{
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    font-size: 30px; 
+    color: var(--text-main);
+}
+
+.main {
+    display: flex;
+    flex: 1;
+}
+
+.sidebar{
+    width: 300px;
+    height: 100%;
+    background: var(--sidebar-bg);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar p {
+    width: 90%;
+    padding: 12px 16px;
+    border-radius: 5px;
+    margin: 0;
+    color: var(--text-muted);
+    background: var(--sidebar-item);
+    cursor: pointer;
+}
+
+.sidebar p:hover{
+    background: var(--sidebar-hover);
+    color: var(--text-main);
+}
+
+.sidebar p.active{
+    background: var(--sidebar-active);
+    color: white;
+}
+
+
+.content{
+    flex: 1;
+    margin: 40px;
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 80px;
+}
+
+.content .main-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.content button {
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: #8b5cf6;
+    color: white;
+    border: none;
+}
+
+.content .cards{
+    display: flex;
+    margin-top: 30px;
+    gap: 50px;
+}
+
+.content .cards div{
+    background:var(--bg-card2);
+    padding: 20px;
+    border-radius: 10px;
+    width: 10rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.content .cards h6{
+    margin: 0;
+}
+
+.content .table{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.content .table table{
+    background: var(--bg-card2);
+    text-align: left;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: solid black;
+    border-width: 1px;
+    border-radius: 10px;
+}
+
+.content .table thead th,
+.content .table tbody td{
+    border: solid black;
+    border-width: 1px;
+    padding: 16px;
+}
+
+
+
+
