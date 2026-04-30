@@ -18,14 +18,15 @@ model User {
   loans    Loan[]
 }
 
-model Loan{
-  id       Int @id @default(autoincrement())
+model Loan {
+  id       Int     @id @default(autoincrement())
   amount   Int
   term     Int
   rate     Float
-  status   String @default("PENDING")
-  
-  userId   Int
-  user     User   @relation(fields: [userId], references: [id])
+  monthly  Float   
+  total    Float  
+  status   String  @default("PENDING")
 
+  userId   Int
+  user     User    @relation(fields: [userId], references: [id])
 }
