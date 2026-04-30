@@ -3,52 +3,69 @@ import { prisma } from '../lib/prisma';
 
 export const applyLoan = async (req: Request, res: Response) => {
   try {
-    const { userId, amount, term } = req.body;
+    let { userId, amount, term } = req.body;
+
+    // convert to numbers
+    const amountNum = Number(amount);
+    const termNum = Number(term);
 
     // validation
-    if (!amount || !term) {
+    if (!amountNum || !termNum || !userId) {
       return res.status(400).json({ message: 'All fields are required' });
     }
 
     let rate = 0;
 
-    if (term === 3) rate = 0.03;
-    else if (term === 6) rate = 0.06;
-    else if (term === 12) rate = 0.12;
+    if (termNum === 3) rate = 0.03;
+    else if (termNum === 6) rate = 0.06;
+    else if (termNum === 12) rate = 0.12;
     else {
       return res.status(400).json({ message: 'Invalid loan term' });
     }
 
-    const interest = amount * rate;
-    const total = amount + interest;
-    const monthly = total / term;
+    const interest = amountNum * rate;
+    const total = amountNum + interest;
+    const monthly = total / termNum;
 
     const loan = await prisma.loan.create({
       data: {
-        amount,
-        term,
+        amount: amountNum,
+        term: termNum,
         rate,
         monthly,
         total,
         status: 'PENDING',
-        userId: userId || 1 // fallback if no auth yet
+        userId
       }
     });
 
     return res.status(201).json(loan);
 
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: 'Server Error' });
+    console.error("APPLY LOAN ERROR:", error);
   }
 };
 
 export const getLoans = async (req: Request, res: Response) => {
   try {
-    const loans = await prisma.loan.findMany();
-    res.json(loans);
+    const { userId, role } = req.query;
+
+    let loans;
+
+    if (role === 'ADMIN') {
+      loans = await prisma.loan.findMany();
+    } else {
+      loans = await prisma.loan.findMany({
+        where: {
+          userId: Number(userId)
+        }
+      });
+    }
+
+    return res.json(loans);
   } catch (error) {
-    res.status(500).json({ message: 'Server Error' });
+    console.error(error);
+    return res.status(500).json({ message: 'Server Error' });
   }
 };
 

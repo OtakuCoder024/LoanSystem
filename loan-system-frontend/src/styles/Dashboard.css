@@ -35,6 +35,39 @@
     font-size: 30px; 
     color: var(--text-main);
 }
+.topbar {
+    height: 100px;
+    background: var(--sidebar-bg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+}
+
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-role {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.logout-btn {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.logout-btn:hover {
+    background: #dc2626;
+}
 
 .main {
     display: flex;

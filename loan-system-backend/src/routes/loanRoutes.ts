@@ -6,7 +6,7 @@ const router = Router();
 
 router.post('/loans', applyLoan);
 router.get('/loans', getLoans);
-router.patch('loans/status', updateLoanStatus);
+router.patch('/loans/status', updateLoanStatus);
 
 
 export default router;

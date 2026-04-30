@@ -3,17 +3,23 @@ import authRoutes from './routes/authRoutes';
 import loanRoutes from './routes/loanRoutes';
 import cors from 'cors';
 
-const app = express();
 
-// middleware
-app.use(cors());
-app.use(express.json());
+  const app = express();
 
-// routes
-app.use('/api/auth', authRoutes);
-app.use('/api', loanRoutes);
+  // middleware
+  app.use(cors());
+  app.use(express.json());
 
-// start server
-app.listen(5000, () => {
-  console.log('Server running on port 5000');
-});
+  // routes
+  app.use('/api/auth', authRoutes);
+  app.use('/api', loanRoutes);
+
+  // start server
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(5000, () => {
+    console.log('Server running on port 5000');
+  });
+}
+
+
+export default app;
