@@ -43,6 +43,7 @@ export const applyLoan = async (req: Request, res: Response) => {
 
   } catch (error) {
     console.error("APPLY LOAN ERROR:", error);
+    return res.status(500).json({ message: 'Server Error' });
   }
 };
 
@@ -78,8 +79,15 @@ export const updateLoanStatus = async (req: Request, res: Response) => {
       data: { status }
     });
 
-    res.json(updated);
-  } catch (err) {
-    res.status(500).json({ message: 'Server error' });
+    return res.json(updated);
+
+  } catch (err: any) {
+
+    if (err.code === 'P2025') {
+      return res.status(404).json({ message: 'Loan not found' });
+    }
+
+    console.error("UPDATE LOAN STATUS ERROR:", err);
+    return res.status(500).json({ message: 'Server error' });
   }
 };
