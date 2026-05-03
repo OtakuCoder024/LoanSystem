@@ -43,7 +43,7 @@ function Dashboard() {
         body: JSON.stringify({
           amount: Number(amount),
           term,
-          userId: user.id, // 🔥 THIS IS THE FIX
+          userId: user.id,
         }),
       });
 
